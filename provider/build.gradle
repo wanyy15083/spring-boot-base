@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+//        jcenter()
+//        maven { url 'https://repo.spring.io/snapshot' }
+//        maven { url 'https://repo.spring.io/milestone' }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+//        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+dependencies {
+    compile project(":api")
+    compile "org.springframework.boot:spring-boot-starter:${bootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-web:${bootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${bootVersion}"
+    compile "com.alibaba.boot:dubbo-spring-boot-starter:0.2.0"
+    compile "com.alibaba.boot:dubbo-spring-boot-actuator:0.2.0"
+
+}

@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        maven { url "http://maven.oschina.net/content/groups/public" }
+//        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
+    }
+}
+
+apply plugin: 'org.flywaydb.flyway'
+apply plugin: 'java'
+
+flyway {
+    url = 'jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8'
+    user = 'root'
+    password = '1234'
+    schemas = ['test']
+    locations = ["filesystem:migrations/"]
+}
+
+repositories {
+    maven { url "http://maven.oschina.net/content/groups/public" }
+//    mavenCentral()
+}
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.35'
+}
