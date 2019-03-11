@@ -1,6 +1,6 @@
 package com.base.controller;
 
-import com.base.service.TestService;
+import com.base.consumer.service.TestService;
 import com.base.model.database.Person;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;

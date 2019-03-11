@@ -1,10 +1,6 @@
 buildscript {
     repositories {
-//        jcenter()
-//        maven { url 'https://repo.spring.io/snapshot' }
-//        maven { url 'https://repo.spring.io/milestone' }
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
-//        mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE")
@@ -20,5 +16,9 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-actuator:${bootVersion}"
     compile "com.alibaba.boot:dubbo-spring-boot-starter:0.2.0"
     compile "com.alibaba.boot:dubbo-spring-boot-actuator:0.2.0"
+    compile "com.alibaba.csp:sentinel-core:0.2.0"
+    compile "com.alibaba.csp:sentinel-dubbo-adapter:0.2.0"
+    compile "com.alibaba.csp:sentinel-transport-simple-http:0.2.0"
+    compile "com.alibaba.csp:sentinel-annotation-aspectj:0.2.0"
 
 }

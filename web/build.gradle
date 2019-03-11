@@ -7,7 +7,7 @@ buildscript {
 //        mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE")
     }
 }
 
@@ -49,9 +49,9 @@ dependencies {
     compile("com.101tec:zkclient:0.10") {
         exclude(group: "log4j")
     }
-    compile("org.apache.curator:curator-framework:4.0.0") {
-        exclude(group: "log4j")
-    }
+//    compile("org.apache.curator:curator-framework:4.0.0") {
+//        exclude(group: "log4j")
+//    }
 
     ///// utility, such as json, etc. //////
     compile "com.google.code.gson:gson:2.8.5"

@@ -1,7 +1,7 @@
 package com.base.listener;
 
 import com.base.model.QueueMessage;
-import com.base.service.TestService;
+import com.base.consumer.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;

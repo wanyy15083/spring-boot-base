@@ -1,6 +1,6 @@
-package com.base.service.impl;
+package com.base.consumer.service.impl;
 
-import com.base.service.TestService;
+import com.base.consumer.service.TestService;
 import com.base.dao.PersonDao;
 import com.base.model.QueueMessage;
 import com.base.model.database.Person;
@@ -39,6 +39,12 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public String sayHello() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        logger.info("service in sayHello");
         return "hello spring";
     }
 

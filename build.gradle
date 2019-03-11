@@ -26,8 +26,8 @@ subprojects {
     }
 
     ext {
-        bootVersion = "2.0.5.RELEASE"
-        springVersion = "5.0.9.RELEASE"
+        bootVersion = "2.1.0.RELEASE"
+        springVersion = "5.1.2.RELEASE"
     }
 
     configurations {

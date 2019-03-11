@@ -4,4 +4,7 @@ include 'api'
 include 'provider'
 include 'consumer'
 include 'web'
+include 'sentinel-provider'
+include 'sentinel-consumer'
+include 'sentinel-web'
 

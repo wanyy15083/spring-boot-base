@@ -11,9 +11,8 @@
 
     <dubbo:protocol name="dubbo" port="20880"/>
 
-    <dubbo:service interface="com.base.service.TestService" ref="testService"  />
+    <dubbo:service interface="com.base.consumer.service.TestService" ref="testService"  />
 
-    <bean id="testService" class="com.base.service.impl.TestServiceImpl" />
+    <bean id="testService" class="com.base.consumer.service.impl.TestServiceImpl" />
 
-    <import resource="test-rabbit.xml" />
 </beans>

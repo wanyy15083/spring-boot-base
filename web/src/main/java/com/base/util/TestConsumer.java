@@ -15,13 +15,11 @@
  */
 package com.base.util;
 
-import com.base.model.database.Person;
-import com.base.service.TestService;
+import com.base.consumer.service.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -38,13 +36,20 @@ public class TestConsumer {
 //        logger.info("person: {}, thread: {}", person, Thread.currentThread().getName());
 
         ExecutorService executor = Executors.newFixedThreadPool(5);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             final int tmp = i;
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    List<Person> person = testService.getPerson("8V");
-                    logger.info("person: {}, thread: {}", person, Thread.currentThread().getName());
+//                    List<Person> person = testService.getPerson("8V");
+                    String result = null;
+                    try {
+                        Thread.sleep(3000);
+                        result = testService.sayHello();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    logger.info("result: {}, thread: {}", result, Thread.currentThread().getName());
                 }
             });
         }

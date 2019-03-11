@@ -13,6 +13,8 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.util.unit.DataSize;
+import org.springframework.util.unit.DataUnit;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.servlet.MultipartConfigElement;
@@ -52,8 +54,8 @@ public class Application extends SpringBootServletInitializer {
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize("2MB");
-        factory.setMaxRequestSize("2MB");
+        factory.setMaxFileSize(DataSize.of(2, DataUnit.MEGABYTES));
+        factory.setMaxRequestSize(DataSize.of(2, DataUnit.MEGABYTES));
         return factory.createMultipartConfig();
     }
 

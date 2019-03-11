@@ -1,4 +1,4 @@
-package com.base.service;
+package com.base.consumer.service;
 
 import com.base.model.database.Person;
 
