@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -38,7 +38,7 @@ public class ApplicationTest {
     private PersonDao personDao;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate redisTemplate;
 
 
     @Test
@@ -71,7 +71,8 @@ public class ApplicationTest {
 
     @Test
     public void testDao() {
-        System.out.println(redisTemplate.opsForValue().get("key"));
+        redisTemplate.opsForValue().set("key1", "test");
+        System.out.println(redisTemplate.opsForValue().get("key1"));
         Person p = new Person();
         p.setFname("8V");
         System.out.println(personDao.getPersons(p));

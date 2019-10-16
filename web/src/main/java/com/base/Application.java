@@ -1,7 +1,6 @@
 package com.base;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
@@ -28,7 +27,7 @@ import javax.servlet.MultipartConfigElement;
 @EnableAsync
 //@EnableCaching
 @ImportResource({"classpath*:spring/spring.xml"})
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 @EnableTransactionManagement
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class Application extends SpringBootServletInitializer {
