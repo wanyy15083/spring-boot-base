@@ -67,6 +67,7 @@ dependencies {
 
     ////apache commons////
     compile "org.apache.httpcomponents:httpclient:4.5.2"
+//    compile 'cn.hutool:hutool-all:5.0.0'
 
     //// testing supportes ////
     testCompile "org.springframework.boot:spring-boot-starter-test:${bootVersion}"

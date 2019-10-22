@@ -64,4 +64,10 @@
         </property>
     </bean>
 
+    <!-- lua script -->
+    <bean id="rateLimiterLua" class="org.springframework.data.redis.core.script.DefaultRedisScript">
+        <property name="location" value="classpath:rate_limiter.lua"/>
+        <property name="resultType" value="java.lang.Long"/>
+    </bean>
+
 </beans>
