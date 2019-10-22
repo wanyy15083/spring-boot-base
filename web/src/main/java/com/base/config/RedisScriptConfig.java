@@ -3,6 +3,7 @@ package com.base.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 
@@ -16,7 +17,10 @@ public class RedisScriptConfig {
     private String location;
 
     @Bean
-    public RedisScript<Long> rateLimiterLua() {
-        return new DefaultRedisScript(location, Long.class);
+    public RedisScript<Long> redisScript() {
+        DefaultRedisScript<Long> script = new DefaultRedisScript<>();
+        script.setLocation(new ClassPathResource(location));
+        script.setResultType(Long.class);
+        return script;
     }
 }

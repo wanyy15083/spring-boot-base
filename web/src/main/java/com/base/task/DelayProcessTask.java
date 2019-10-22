@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -23,7 +22,7 @@ public class DelayProcessTask {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    @Scheduled(cron = "0/1 * * * * *")
+//    @Scheduled(cron = "0/1 * * * * *")
     public void produceOrder() {
         int currentTime = CommonUtils.getCurrentTimeStamp();
         ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
@@ -33,7 +32,7 @@ public class DelayProcessTask {
         logger.info("订单生产完成================");
     }
 
-    @Scheduled(cron = "0/1 * * * * *")
+//    @Scheduled(cron = "0/1 * * * * *")
     public void condumeOrder() {
         int currentTime = CommonUtils.getCurrentTimeStamp();
         ZSetOperations<String, String> zSetOperations = redisTemplate.opsForZSet();
