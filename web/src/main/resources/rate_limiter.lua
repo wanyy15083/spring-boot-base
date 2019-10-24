@@ -44,22 +44,32 @@ local function acquireIncr(key, limit)
     end
 end
 
+local function unlock(key, value)
+    if redis.call("get",key) == value then
+        return redis.call("del",key)
+    else
+        return 0
+    end
+end
+
 local key = KEYS[1]
 local method = ARGV[1]
 local permits = tonumber(ARGV[2])
 local curr_mill_sec = tonumber(ARGV[3])
 local limit = tonumber(ARGV[4])
 
-local key = 'acquireIncr'
-local method = 'acquireIncr'
-local permits = 0
-local curr_mill_sec = 0
-local limit = 3
+--local key = 'acquireIncr'
+--local method = 'acquireIncr'
+--local permits = 0
+--local curr_mill_sec = 0
+--local limit = 3
 
 if method == 'acquire' then
     return acquire(key, permits, curr_mill_sec)
 elseif method == 'acquireIncr' then
     return acquireIncr(key, limit)
+elseif method == 'unlock' then
+    return unlock(key, ARGV[2])
 else
     --ignore
 end

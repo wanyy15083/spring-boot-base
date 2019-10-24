@@ -61,6 +61,8 @@ dependencies {
 //        exclude(group: "log4j")
 //    }
 
+    compile "org.apache.curator:curator-recipes:2.12.0"
+
     ///// utility, such as json, etc. //////
     compile "com.google.code.gson:gson:2.8.5"
     compile "org.apache.commons:commons-pool2:2.4.3"
