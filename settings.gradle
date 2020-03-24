@@ -7,4 +7,5 @@ include 'web'
 include 'sentinel-provider'
 include 'sentinel-consumer'
 include 'sentinel-web'
+include 'rabbit'
 

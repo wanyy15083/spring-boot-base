@@ -1,19 +1,20 @@
 package com.base.provider.service;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.base.api.DemoService;
+import org.apache.dubbo.config.annotation.Service;
+import org.springframework.beans.factory.annotation.Value;
 
-@Service(
-        version = "${demo.service.version}",
-        application = "${dubbo.application.id}",
-        protocol = "${dubbo.protocol.id}",
-        registry = "${dubbo.registry.id}"
-)
+@Service(version = "${demo.service.version}")
 public class DefaultDemoService implements DemoService {
+
+    /**
+     * The default value of ${dubbo.application.name} is ${spring.application.name}
+     */
+    @Value("${dubbo.application.name}")
+    private String serviceName;
 
     @Override
     public String sayHello(String name) {
-        return "Hello, " + name + " (from Spring Boot)";
+        return String.format("[%s] : Hello, %s", serviceName, name);
     }
-
 }

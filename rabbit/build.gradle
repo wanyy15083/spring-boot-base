@@ -1,0 +1,17 @@
+buildscript {
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
+    }
+}
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+dependencies {
+
+    compile "org.springframework.boot:spring-boot-starter:${bootVersion}"
+    compile "org.springframework.boot:spring-boot-starter-amqp:${bootVersion}"
+
+}

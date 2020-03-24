@@ -15,8 +15,8 @@
  */
 package com.base.provider.service;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.base.api.FooService;
+import org.apache.dubbo.config.annotation.Service;
 
 import java.time.LocalDateTime;
 

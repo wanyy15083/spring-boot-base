@@ -15,8 +15,8 @@
  */
 package com.base.consumer;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.base.api.FooService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Component;
 
 /**

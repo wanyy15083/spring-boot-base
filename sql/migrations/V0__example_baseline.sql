@@ -3,12 +3,24 @@
 -- ----------------------------
 CREATE TABLE `person` (
   `id` bigint(20) unsigned NOT NULL,
-  `fname` varchar(100) NOT NULL,
-  `lname` varchar(100) NOT NULL,
+  `fname` varchar(128) NOT NULL,
+  `lname` varchar(128) NOT NULL,
   `age` tinyint(3) unsigned NOT NULL,
   `sex` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+create table log_person
+(
+  id     bigint unsigned auto_increment
+    primary key,
+  fname  varchar(128)        not null,
+  data   varchar(1024)       not null,
+  time   varchar(32)         not null,
+  status tinyint(1) unsigned not null
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `generate`(IN num INT)
 BEGIN

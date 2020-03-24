@@ -3,7 +3,7 @@ buildscript {
         maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
     }
 }
 apply plugin: "org.springframework.boot"
@@ -14,6 +14,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter:${bootVersion}"
     compile "org.springframework.boot:spring-boot-starter-web:${bootVersion}"
     compile "org.springframework.boot:spring-boot-starter-actuator:${bootVersion}"
-    compile "org.springframework.cloud:spring-cloud-alibaba-sentinel:0.2.0.RELEASE"
+    compile "com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel:2.2.0.RELEASE"
 
 }

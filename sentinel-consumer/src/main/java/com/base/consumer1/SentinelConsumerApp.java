@@ -6,8 +6,9 @@ import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.SentinelRpcException;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
-import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
-import com.alibaba.dubbo.rpc.RpcResult;
+import com.alibaba.dubbo.rpc.Result;
+import org.apache.dubbo.config.spring.context.annotation.DubboComponentScan;
+import org.apache.dubbo.rpc.AppResponse;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -20,6 +21,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by bj-s2-w1631 on 18-11-15.
  */
+
 @SpringBootApplication
 @DubboComponentScan("com.base.consumer1")
 public class SentinelConsumerApp {
@@ -71,6 +73,6 @@ public class SentinelConsumerApp {
         // If you only want to handle degrading, you need to
         // check the type of BlockException.
         DubboFallbackRegistry.setConsumerFallback((a, b, ex) ->
-                new RpcResult("Error: " + ex.getClass().getTypeName()));
+                (Result) new AppResponse("Error: " + ex.getClass().getTypeName()));
     }
 }
