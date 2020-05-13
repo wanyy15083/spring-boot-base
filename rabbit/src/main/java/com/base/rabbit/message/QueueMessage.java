@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -50,7 +51,20 @@ public class QueueMessage {
         Gson gson = new Gson();
         Message message = null;
         try {
-            message = MessageBuilder.withBody(gson.toJson(this).getBytes("UTF-8")).build();
+            message = MessageBuilder.withBody(gson.toJson(this).getBytes(StandardCharsets.UTF_8)).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return message;
+    }
+
+    public Message toAmqpMessageForTTL(String expiration) {
+        Gson gson = new Gson();
+        Message message;
+        try {
+            message = MessageBuilder.withBody(gson.toJson(this).getBytes(StandardCharsets.UTF_8)).build();
+            message.getMessageProperties().setExpiration(expiration);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException();

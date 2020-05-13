@@ -32,11 +32,10 @@ public class TestProvider {
     @Value("${rabbit.routing.key.test}")
     private String testRoutingKey;
 
-    @Value("${rabbit.queue.test}")
-    private String testQueue;
+    @Value("${rabbit.routing.key.test_delay}")
+    private String testDelayRoutingKey;
 
-
-    @Scheduled(cron = "0/3 * * * * *")
+    //    @Scheduled(cron = "0/3 * * * * *")
     public void testProvide() {
         for (int i = 0; i < 3; i++) {
             int result = count.getAndIncrement();
@@ -45,6 +44,18 @@ public class TestProvider {
             logger.info("testProvide message = {}", queueMessage.toString());
             rabbitTemplate.send(testExchange, testRoutingKey, msg);
         }
+    }
+
+    @Scheduled(cron = "0 */1 * * * *")
+    public void testProvideDelay() {
+        for (int i = 0; i < 3; i++) {
+            int result = count.getAndIncrement();
+            QueueMessage queueMessage = new QueueMessage("test delay msg: " + result);
+            Message msg = queueMessage.toAmqpMessageForTTL(30000 * i + "");
+            logger.info("testProvideDelay message = {}", queueMessage.toString());
+            rabbitTemplate.send(testExchange, testDelayRoutingKey, msg);
+        }
+
     }
 
 

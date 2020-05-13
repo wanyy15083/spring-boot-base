@@ -86,7 +86,8 @@ public class RedissonTest {
         RLock lock = redisson.getLock("myLock");
         Runnable task = () -> {
             try {
-                lock.lock();
+//                lock.lock();//阻塞
+                lock.tryLock();//互斥
                 System.out.println("获得锁==========");
                 TimeUnit.SECONDS.sleep(1);
                 System.out.println("执行完成==========");
@@ -100,8 +101,8 @@ public class RedissonTest {
         };
         Thread t1 = new Thread(task);
         Thread t2 = new Thread(task);
-        t1.run();
-        t2.run();
+        t1.start();
+        t2.start();
         t1.join();
         t2.join();
 
