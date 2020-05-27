@@ -54,7 +54,7 @@
     </rabbit:direct-exchange>
 
     <rabbit:template id="rabbitTemplate" connection-factory="rabbitConnectionFactory"
-                     retry-template="retryTemplate" reply-timeout="60000"/>
+                     retry-template="retryTemplate" reply-timeout="60000" mandatory="true" confirm-callback="" return-callback=""/>
 
     <bean id="retryTemplate" class="org.springframework.retry.support.RetryTemplate">
         <property name="backOffPolicy">

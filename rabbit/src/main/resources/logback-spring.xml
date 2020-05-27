@@ -17,6 +17,6 @@
 	</root>
 
 	<!-- app logger -->
-	<logger name="com.base" level="DEBUG"/>
+<!--	<logger name="com.base" level="DEBUG"/>-->
 
 </configuration>

@@ -13,5 +13,6 @@ dependencies {
 
     compile "org.springframework.boot:spring-boot-starter:${bootVersion}"
     compile "org.springframework.boot:spring-boot-starter-amqp:${bootVersion}"
+    compile "org.apache.commons:commons-lang3:3.10"
 
 }

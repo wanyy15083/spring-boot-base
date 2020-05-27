@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
+ *
  */
 public class QueueMessage {
     public String getTaskId() {
@@ -33,6 +34,7 @@ public class QueueMessage {
     public QueueMessage(String payload) {
         taskId = UUID.randomUUID().toString();
         this.payload = payload;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public static QueueMessage fromAmqpMessage(Message message) {
@@ -72,6 +74,19 @@ public class QueueMessage {
         return message;
     }
 
+    public Message toAmqpMessageForDelay(Integer delaySec) {
+        Gson gson = new Gson();
+        Message message;
+        try {
+            message = MessageBuilder.withBody(gson.toJson(this).getBytes(StandardCharsets.UTF_8)).build();
+            message.getMessageProperties().setHeader("x-delay", delaySec * 1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return message;
+    }
+
     public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
@@ -85,9 +100,27 @@ public class QueueMessage {
         this.type = type;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
+
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+
     private String taskId;
     private String payload;
     private int type;
+    private long timestamp;
+    private int delay;
 
     @Override
     public String toString() {
@@ -95,6 +128,8 @@ public class QueueMessage {
                 "taskId='" + taskId + '\'' +
                 ", payload='" + payload + '\'' +
                 ", type=" + type +
+                ", timestamp=" + timestamp +
+                ", delay=" + delay +
                 '}';
     }
 }
