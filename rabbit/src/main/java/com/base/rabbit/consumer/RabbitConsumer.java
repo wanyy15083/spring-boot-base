@@ -38,7 +38,7 @@ public class RabbitConsumer {
 
     private static final AtomicInteger counter = new AtomicInteger();
 
-    private static final Map<String, CachingConnectionFactory> connectionFactorys = new ConcurrentHashMap<>();
+    private static final Map<String, CachingConnectionFactory> connectionFactories = new ConcurrentHashMap<>();
     private static final Map<String, MessageListenerContainer> listenerContainers = new ConcurrentHashMap<>();
 
 
@@ -49,8 +49,9 @@ public class RabbitConsumer {
         connectionFactory.setUsername("test");
         connectionFactory.setPassword("test");
         connectionFactory.setVirtualHost("/test");
-        String id = "org.springframework.amqp.rabbit.connection.CachingConnectionFactory#" + counter.getAndIncrement();
-        connectionFactorys.put(id, connectionFactory);
+        String id = "rabbit#" + counter.getAndIncrement();
+        connectionFactories.put(id, connectionFactory);
+
 //        RabbitAdmin admin = new RabbitAdmin(connectionFactory);
 //        admin.declareQueue(new Queue("foo"));
 
@@ -141,7 +142,7 @@ public class RabbitConsumer {
         rabbitProperties.setRequestedHeartbeat(30000);
         rabbitProperties.setConcurrency(2);
         rabbitProperties.setMaxConcurrency(10);
-        rabbitProperties.setAutoAck(true);
+//        rabbitProperties.setAutoAck(true);
         source.setExchange("ex_test");
         source.setRoutingKey("test");
         source.setQueue("test.rabbit");

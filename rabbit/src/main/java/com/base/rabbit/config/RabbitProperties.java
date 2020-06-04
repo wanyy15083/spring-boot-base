@@ -2,6 +2,7 @@ package com.base.rabbit.config;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.core.AcknowledgeMode;
 
 public class RabbitProperties {
 
@@ -9,16 +10,16 @@ public class RabbitProperties {
     private int port = 5672;
     private String username = "guest";
     private String password = "guest";
-    private String virtualHost;
+    private String virtualHost = "/";
     private String addresses;
     private int requestedHeartbeat;
     private int connectionTimeout;
     private int channelCacheSize;
-    private Integer concurrency;
-    private Integer maxConcurrency;
-    private Integer batchSize;
-    private boolean autoAck;
-    private Integer prefetch;
+    private Integer concurrency = 2;
+    private Integer maxConcurrency = 10;
+    private Integer batchSize = 1;
+    private AcknowledgeMode ackMode = AcknowledgeMode.AUTO;
+    private Integer prefetch = 10;
 
     public String getHost() {
         return host;
@@ -116,12 +117,12 @@ public class RabbitProperties {
         this.batchSize = batchSize;
     }
 
-    public boolean getAutoAck() {
-        return autoAck;
+    public AcknowledgeMode getAckMode() {
+        return ackMode;
     }
 
-    public void setAutoAck(boolean autoAck) {
-        this.autoAck = autoAck;
+    public void setAckMode(AcknowledgeMode ackMode) {
+        this.ackMode = ackMode;
     }
 
     public Integer getPrefetch() {
@@ -147,13 +148,13 @@ public class RabbitProperties {
                 ", concurrency=" + concurrency +
                 ", maxConcurrency=" + maxConcurrency +
                 ", batchSize=" + batchSize +
-                ", autoAck=" + autoAck +
+                ", ackMode=" + ackMode +
                 ", prefetch=" + prefetch +
                 '}';
     }
 
     public String determineAddresses() {
-        if (StringUtils.isNotBlank(this.addresses)) {
+        if (StringUtils.isBlank(this.addresses)) {
             return this.host + ":" + this.port;
         }
         return addresses;

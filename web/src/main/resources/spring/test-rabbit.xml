@@ -15,9 +15,9 @@
         classpath*:properties/redis.properties,file:/data/config/zzexample/prod.properties"
                                   system-properties-mode="ENVIRONMENT"/>
 
-    <rabbit:connection-factory id="rabbitConnectionFactory" host="${rabbit.host}" port="${rabbit.port}" 
-                               username="${rabbit.username}" password="${rabbit.password}" requested-heartbeat="30"
-                               virtual-host="${rabbit.vhost}" channel-cache-size="50"/>
+    <rabbit:connection-factory id="rabbitConnectionFactory" host="127.0.0.1" port="5672"
+                               username="test" password="test" requested-heartbeat="30"
+                               virtual-host="/test" channel-cache-size="50"/>
 
     <rabbit:admin id="rabbitAdmin" connection-factory="rabbitConnectionFactory"/>
 
@@ -29,9 +29,9 @@
     </bean>
 
     <!-- queue declare -->
-    <rabbit:queue durable="true" auto-delete="false" exclusive="false" name="${rabbit.queue.statuschange}"/>
-    <rabbit:queue durable="true" auto-delete="false" exclusive="false" name="${rabbit.queue.dead}"/>
-    <rabbit:queue durable="true" auto-delete="false" exclusive="false" name="${rabbit.queue.sendmessage}">
+<!--    <rabbit:queue durable="true" auto-delete="false" exclusive="false" name="${rabbit.queue.statuschange}"/>-->
+<!--    <rabbit:queue durable="true" auto-delete="false" exclusive="false" name="${rabbit.queue.dead}"/>-->
+    <rabbit:queue durable="true" auto-delete="false" exclusive="false" name="test.sendmessage">
         <!--<rabbit:queue-arguments>-->
             <!--<entry key="x-message-ttl" value="10000" value-type="java.lang.Long"/>-->
             <!--<entry key="x-ha-policy" value="all"/>-->
@@ -40,18 +40,17 @@
     </rabbit:queue>
 
     <!-- bind queue to exchange -->
-    <rabbit:direct-exchange name="${rabbit.exchange.ex_test}" auto-delete="false" durable="true">
+    <rabbit:direct-exchange name="ex_1_test" auto-delete="false" durable="true">
         <rabbit:bindings>
-            <rabbit:binding queue="${rabbit.queue.statuschange}" key="${rabbit.routing.key.status}"></rabbit:binding>
-            <rabbit:binding queue="${rabbit.queue.sendmessage}" key="${rabbit.routing.key.message}"></rabbit:binding>
+            <rabbit:binding queue="test.sendmessage" key="message"></rabbit:binding>
         </rabbit:bindings>
     </rabbit:direct-exchange>
 
-    <rabbit:direct-exchange name="${rabbit.exchange.ex_test_dead}" auto-delete="false" durable="true">
-        <rabbit:bindings>
-            <rabbit:binding queue="${rabbit.queue.dead}" key="${rabbit.routing.key.dead}"></rabbit:binding>
-        </rabbit:bindings>
-    </rabbit:direct-exchange>
+<!--    <rabbit:direct-exchange name="${rabbit.exchange.ex_test_dead}" auto-delete="false" durable="true">-->
+<!--        <rabbit:bindings>-->
+<!--            <rabbit:binding queue="${rabbit.queue.dead}" key="${rabbit.routing.key.dead}"></rabbit:binding>-->
+<!--        </rabbit:bindings>-->
+<!--    </rabbit:direct-exchange>-->
 
     <rabbit:template id="rabbitTemplate" connection-factory="rabbitConnectionFactory"
                      retry-template="retryTemplate" reply-timeout="60000" mandatory="true" confirm-callback="" return-callback=""/>

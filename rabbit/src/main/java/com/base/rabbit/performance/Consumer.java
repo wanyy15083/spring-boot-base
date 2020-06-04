@@ -22,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.LinkedList;
@@ -31,7 +30,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Component
+//@Component
 public class Consumer {
     private static final Logger logger = LoggerFactory.getLogger(Consumer.class);
     private final StatsBenchmarkConsumer statsBenchmarkConsumer = new StatsBenchmarkConsumer();

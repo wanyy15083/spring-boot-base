@@ -12,5 +12,12 @@ public class TestConfirmCallBack implements RabbitTemplate.ConfirmCallback {
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
 //        logger.info("message confirm data: {}, ack: {}, cause: {}", correlationData, ack, cause);
+        assert correlationData != null;
+        String eventId = correlationData.getId();
+        if (ack) {
+            logger.info("Publish confirmed event[{}].", eventId);
+        } else {
+            logger.warn("Publish event[{}] is nacked while publish:{}.", eventId, cause);
+        }
     }
 }
